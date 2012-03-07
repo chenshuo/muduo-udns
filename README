@@ -1,8 +1,9 @@
 Muduo Non-blocking Address Resolver using UDNS
+https://github.com/chenshuo/muduo-udns
 
 Copyright (C) 2012  Chen Shuo <chenshuo@chenshuo.com>
 This file is part of muduo-udns library, a non-blocking DNS
-stub resolver built on top of UDNS.
+stub resolver built on top of UDNS (www.corpit.ru/mjt/udns.html).
 
 This library is free software; you can redistribute it and/or
 modify it under the terms of the GNU Lesser General Public

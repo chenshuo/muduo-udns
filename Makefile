@@ -18,21 +18,27 @@ CXXFLAGS = -g -O0 -Wall -Wextra -Werror \
 	   -Wold-style-cast -Woverloaded-virtual \
 	   -Wpointer-arith -Wshadow -Wwrite-strings \
 	   -march=native -rdynamic \
-	   -I$(MUDUO_INCLUDE)
+	   -I$(MUDUO_INCLUDE) -I$(UDNSDIR)
 
 CFLAGS = -Wall -W -O2 -pipe -g
 
-LDFLAGS = -L$(MUDUO_LIBRARY) -lmuduo_net -lmuduo_base -lpthread
+LDFLAGS = -L$(MUDUO_LIBRARY) -L$(UDNSDIR) -lmuduo_net -lmuduo_base -lpthread -ludns
 
-all: libudns
+all: libudns dns
+
 clean:
 	rm -f core $(UDNSDIR)/libudns.a
 	cd $(UDNSDIR) && make clean
 
-libudns:$(UDNSDIR)/libudns.a
+libudns: $(UDNSDIR)/libudns.a
 
 $(UDNSDIR)/libudns.a:
 	cd $(UDNSDIR) && CFLAGS='$(CFLAGS)' ./configure --disable-ipv6 && make
 
+Resolver.o: Resolver.cc Resolver.h
+	g++ $(CXXFLAGS) -c $<
+
+dns: dns.cc Resolver.o $(UDNSDIR)/libudns.a
+	g++ $(CXXFLAGS) -o $@ $^ $(LDFLAGS)
 
 .PHONY: all clean libudns
