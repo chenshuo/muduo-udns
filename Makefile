@@ -13,7 +13,7 @@ UDNSHEADERS = config.h udns.h
 
 BUILDDIR = build
 
-CXXFLAGS = -g -O0 -Wall -Wextra -Werror \
+CXXFLAGS = -g -O2 -Wall -Wextra -Werror \
 	   -Wconversion -Wno-unused-parameter \
 	   -Wold-style-cast -Woverloaded-virtual \
 	   -Wpointer-arith -Wshadow -Wwrite-strings \

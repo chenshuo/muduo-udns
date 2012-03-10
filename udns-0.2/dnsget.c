@@ -755,5 +755,6 @@ int main(int argc, char **argv) {
     if (i > 0) dns_ioevent(NULL, now);
   }
 
+  dns_reset(NULL);
   return errors ? 1 : notfound ? 100 : 0;
 }
