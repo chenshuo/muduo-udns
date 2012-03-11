@@ -24,7 +24,7 @@ CFLAGS = -Wall -W -O2 -pipe -g
 
 LDFLAGS = -L$(MUDUO_LIBRARY) -L$(UDNSDIR) -lmuduo_net -lmuduo_base -lpthread -ludns
 
-all: libudns dns
+all: libudns udns
 
 clean:
 	rm -f core $(UDNSDIR)/libudns.a
