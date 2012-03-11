@@ -3,7 +3,9 @@ https://github.com/chenshuo/muduo-udns
 
 Copyright (C) 2012  Chen Shuo <chenshuo@chenshuo.com>
 This file is part of muduo-udns library, a non-blocking DNS
-stub resolver built on top of UDNS (www.corpit.ru/mjt/udns.html).
+stub resolver built on top of UDNS (www.corpit.ru/mjt/udns.html)
+and Muduo (code.google.com/p/muduo).
+Requires Muduo 0.3.2 and above.
 
 This library is free software; you can redistribute it and/or
 modify it under the terms of the GNU Lesser General Public

@@ -35,6 +35,7 @@ struct UdnsInitializer
 
 UdnsInitializer udnsInitializer;
 
+const bool kDebug = false;
 }
 
 using namespace muduo::net;
@@ -117,15 +118,18 @@ void Resolver::onQueryResult(struct dns_rr_a4 *result, const Callback& callback)
   addr.sin_port = 0;
   if (result)
   {
-    printf("cname %s\n", result->dnsa4_cname);
-    printf("qname %s\n", result->dnsa4_qname);
-    printf("ttl %d\n", result->dnsa4_ttl);
-    printf("nrr %d\n", result->dnsa4_nrr);
-    for (int i = 0; i < result->dnsa4_nrr; ++i)
+    if (kDebug)
     {
-      char buf[32];
-      ::dns_ntop(AF_INET, &result->dnsa4_addr[i], buf, sizeof buf);
-      printf("  %s\n", buf);
+      printf("cname %s\n", result->dnsa4_cname);
+      printf("qname %s\n", result->dnsa4_qname);
+      printf("ttl %d\n", result->dnsa4_ttl);
+      printf("nrr %d\n", result->dnsa4_nrr);
+      for (int i = 0; i < result->dnsa4_nrr; ++i)
+      {
+        char buf[32];
+        ::dns_ntop(AF_INET, &result->dnsa4_addr[i], buf, sizeof buf);
+        printf("  %s\n", buf);
+      }
     }
     addr.sin_addr = result->dnsa4_addr[0];
   }
@@ -137,7 +141,6 @@ void Resolver::dns_query_a4(struct dns_ctx *ctx, struct dns_rr_a4 *result, void 
 {
   QueryData* query = static_cast<QueryData*>(data);
 
-  printf("dns_query_a4 %p\n", query);
   assert(ctx == query->owner->ctx_);
   query->owner->onQueryResult(result, query->callback);
   free(result);

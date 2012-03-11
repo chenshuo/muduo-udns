@@ -38,7 +38,7 @@ $(UDNSDIR)/libudns.a:
 Resolver.o: Resolver.cc Resolver.h
 	g++ $(CXXFLAGS) -c $<
 
-dns: dns.cc Resolver.o $(UDNSDIR)/libudns.a
+udns: dns.cc Resolver.o $(UDNSDIR)/libudns.a
 	g++ $(CXXFLAGS) -o $@ $^ $(LDFLAGS)
 
 .PHONY: all clean libudns
