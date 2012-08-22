@@ -1,4 +1,5 @@
 #include "Resolver.h"
+#include <muduo/base/Logging.h>
 #include <muduo/net/EventLoop.h>
 #include <boost/bind.hpp>
 #include <stdio.h>
@@ -17,7 +18,7 @@ void quit()
 
 void resolveCallback(const string& host, const InetAddress& addr)
 {
-  printf("resolveCallback %s -> %s\n", host.c_str(), addr.toHostPort().c_str());
+  LOG_INFO << "resolved " << host << " -> " << addr.toIp();
   if (++count == total)
     quit();
 }
@@ -45,7 +46,9 @@ int main(int argc, char* argv[])
   {
     total = argc-1;
     for (int i = 1; i < argc; ++i)
+    {
       resolve(&resolver, argv[i]);
+    }
   }
   loop.loop();
 }

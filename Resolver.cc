@@ -146,3 +146,4 @@ void Resolver::dns_query_a4(struct dns_ctx *ctx, struct dns_rr_a4 *result, void 
   free(result);
   delete query;
 }
+
