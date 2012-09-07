@@ -55,7 +55,7 @@ Resolver::Resolver(EventLoop* loop)
 Resolver::~Resolver()
 {
   channel_->disableAll();
-  loop_->removeChannel(get_pointer(channel_));
+  channel_->remove();
   ::dns_free(ctx_);
 }
 
