@@ -52,6 +52,19 @@ Resolver::Resolver(EventLoop* loop)
   ::dns_set_opt(ctx_, DNS_OPT_TIMEOUT, 2);
 }
 
+Resolver::Resolver(EventLoop *loop, const InetAddress &nameServer):
+    loop_(loop),
+    ctx_(NULL),
+    fd_(-1),
+    timerActive_(false)
+{
+    init_udns();
+    ctx_ = ::dns_new(NULL);
+    assert(ctx_ != NULL);
+    ::dns_add_serv_s(ctx_, nameServer.getSockAddr());
+    ::dns_set_opt(ctx_, DNS_OPT_TIMEOUT, 2);
+}
+
 Resolver::~Resolver()
 {
   channel_->disableAll();
