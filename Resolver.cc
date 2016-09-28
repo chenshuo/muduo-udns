@@ -52,7 +52,6 @@ Resolver::Resolver(EventLoop* loop)
   ::dns_set_opt(ctx_, DNS_OPT_TIMEOUT, 2);
 }
 
-
 Resolver::Resolver(EventLoop *loop, const InetAddress &nameServer):
     loop_(loop),
     ctx_(NULL),
