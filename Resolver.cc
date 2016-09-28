@@ -60,9 +60,9 @@ Resolver::Resolver(EventLoop *loop, const InetAddress &nameServer):
 {
     init_udns();
     ctx_ = ::dns_new(NULL);
-    assert(ctx_ !=NULL);
-    ::dns_add_serv_s(ctx_,nameServer.getSockAddr());
-    ::dns_set_opt(ctx_,DNS_OPT_TIMEOUT,2);
+    assert(ctx_ != NULL);
+    ::dns_add_serv_s(ctx_, nameServer.getSockAddr());
+    ::dns_set_opt(ctx_, DNS_OPT_TIMEOUT, 2);
 }
 
 Resolver::~Resolver()
